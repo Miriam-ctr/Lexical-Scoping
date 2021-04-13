@@ -1,0 +1,94 @@
+
+R version 4.0.4 (2021-02-15) -- "Lost Library Book"
+Copyright (C) 2021 The R Foundation for Statistical Computing
+Platform: i386-w64-mingw32/i386 (32-bit)
+
+R es un software libre y viene sin GARANTIA ALGUNA.
+Usted puede redistribuirlo bajo ciertas circunstancias.
+Escriba 'license()' o 'licence()' para detalles de distribucion.
+
+R es un proyecto colaborativo con muchos contribuyentes.
+Escriba 'contributors()' para obtener más información y
+'citation()' para saber cómo citar R o paquetes de R en publicaciones.
+
+Escriba 'demo()' para demostraciones, 'help()' para el sistema on-line de ayuda,
+o 'help.start()' para abrir el sistema de ayuda HTML con su navegador.
+Escriba 'q()' para salir de R.
+
+> makeVector <- function(x = numeric()) {
++         m <- NULL
++         set <- function(y) {
++                 x <<- y
++                 m <<- NULL
++         }
++         get <- function() x
++         setmean <- function(mean) m <<- mean
++         getmean <- function() m
++         list(set = set, get = get,
++              setmean = setmean,
++              getmean = getmean)
++ }
+> makeVector
+function(x = numeric()) {
+        m <- NULL
+        set <- function(y) {
+                x <<- y
+                m <<- NULL
+        }
+        get <- function() x
+        setmean <- function(mean) m <<- mean
+        getmean <- function() m
+        list(set = set, get = get,
+             setmean = setmean,
+             getmean = getmean)
+}
+> median (makeVector)na. rm = TRUE
+Error: unexpected symbol in "median (makeVector)na."
+> median ("makeVector") na. rm = "TRUE"
+Error: unexpected symbol in "median ("makeVector") na."
+> mean (makeVector)
+[1] NA
+Warning message:
+In mean.default(makeVector) :
+  argument is not numeric or logical: returning NA
+> mean (makeVector) na.rm = "TRUE"
+Error: unexpected symbol in "mean (makeVector) na.rm"
+> mean (makeVector)= TRUE
+Error in mean(makeVector) = TRUE : 
+  no se pudo encontrar la función "mean<-"
+> mean (makeVector)
+[1] NA
+Warning message:
+In mean.default(makeVector) :
+  argument is not numeric or logical: returning NA
+> seatmean (makeVector)
+Error in seatmean(makeVector) : 
+  no se pudo encontrar la función "seatmean"
+> cachemean <- function(x, ...) {
++         m <- x$getmean()
++         if(!is.null(m)) {
++                 message("getting cached data")
++                 return(m)
++         }
++         data <- x$get()
++         m <- mean(data, ...)
++         x$setmean(m)
++         m
++ }
+> cachemean
+function(x, ...) {
+        m <- x$getmean()
+        if(!is.null(m)) {
+                message("getting cached data")
+                return(m)
+        }
+        data <- x$get()
+        m <- mean(data, ...)
+        x$setmean(m)
+        m
+}
+> makeCacheMatrix
+Error: objeto 'makeCacheMatrix' no encontrado
+> cacheSolve
+Error: objeto 'cacheSolve' no encontrado
+> 
